@@ -1,5 +1,5 @@
 // app/api/auth/callback/route.ts
-import { getAccessToken, listGmailLabels,watchGmailInbox } from '../gmail';
+import { getAccessToken, watchGmailInbox } from '../gmail';
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
