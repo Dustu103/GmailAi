@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
     const result = await watchGmailInbox(client);
     console.log('Watch result:', result);
     return NextResponse.json({ data: result });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
