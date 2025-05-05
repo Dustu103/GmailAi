@@ -13,7 +13,8 @@ export async function GET(req: Request) {
     const auth = await getAccessToken(code);
     const labels = await listGmailLabels(auth);
     return Response.json({ labels });
-  } catch (err: any) {
-    return Response.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return Response.json({ error: message }, { status: 500 });
   }
 }
