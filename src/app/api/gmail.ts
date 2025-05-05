@@ -29,3 +29,19 @@ export async function listGmailLabels(auth: OAuth2Client) {
   const res = await gmail.users.labels.list({ userId: 'me' });
   return res.data.labels || [];
 }
+
+
+export async function watchGmailInbox(auth: OAuth2Client) {
+    const gmail = google.gmail({ version: 'v1', auth });
+  
+    const res = await gmail.users.watch({
+      userId: 'me',
+      requestBody: {
+        topicName: 'projects/YOUR_PROJECT_ID/topics/YOUR_TOPIC_NAME',
+        labelIds: ['INBOX'],
+        labelFilterAction: 'include',
+      },
+    });
+  
+    return res.data;
+  }
