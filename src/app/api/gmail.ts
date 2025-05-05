@@ -37,7 +37,7 @@ export async function watchGmailInbox(auth: OAuth2Client) {
     const res = await gmail.users.watch({
       userId: 'me',
       requestBody: {
-        topicName: 'projects/YOUR_PROJECT_ID/topics/YOUR_TOPIC_NAME',
+        topicName: process.env.TOPIC_NAME,
         labelIds: ['INBOX'],
         labelFilterAction: 'include',
       },
