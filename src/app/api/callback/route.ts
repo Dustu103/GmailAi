@@ -12,6 +12,7 @@ export async function GET(req: Request) {
   try {
     const auth = await getAccessToken(code);
     const watchResponse = await watchGmailInbox(auth);
+    console.log('Watch response:', watchResponse);
     // const labels = await listGmailLabels(auth);
     return Response.redirect('/api/notifications', 302);
   } catch (err: unknown) {
