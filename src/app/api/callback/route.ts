@@ -13,7 +13,7 @@ export async function GET(req: Request) {
     const auth = await getAccessToken(code);
     const watchResponse = await watchGmailInbox(auth);
     // const labels = await listGmailLabels(auth);
-    return Response.json({ watchResponse });
+    return Response.redirect('/api/notifications', 302);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return Response.json({ error: message }, { status: 500 });
