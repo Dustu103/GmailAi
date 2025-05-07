@@ -1,6 +1,5 @@
-import { google } from 'googleapis';
+
 import { NextResponse } from 'next/server';
-// import { buffer } from 'micro';
 
 // Disable Next.js body parsing to access raw request body
 export const config = {
