@@ -12,11 +12,8 @@ export async function GET(req: Request) {
   try {
     const auth = await getAccessToken(code);
     const watchResponse = await watchGmailInbox(auth);
-    console.log('Watch response:', watchResponse);
     // const labels = await listGmailLabels(auth);
-    const redirectUrl = new URL('/api/notifications', req.url);
-return Response.redirect(redirectUrl.toString(), 302);
-
+    return Response.json({ watchResponse });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return Response.json({ error: message }, { status: 500 });
