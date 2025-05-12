@@ -18,13 +18,15 @@ export async function refreshAccessToken(email: string, refreshToken: string, cu
     return null;
   }
 }
-interface User {
-  email: string;
-  access_token: string;
-  refresh_token: string;
-  expiry_date: number;
-  history_id: string;
-}
+
+
+// interface User {
+//   email: string;
+//   access_token: string;
+//   refresh_token: string;
+//   expiry_date: number;
+//   history_id: string;
+// }
 
 // Function to update user credentials
 export async function updateUserCredentials(
