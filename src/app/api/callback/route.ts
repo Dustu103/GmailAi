@@ -32,7 +32,7 @@ export async function GET(req: Request) {
      await db(email!, access_token!, refresh_token!, expiry_date!,historyId!);
     console.log('Watch response:', watchResponse);
     // Redirect to main page
-    return Response.redirect('/', 302);
+    return Response.redirect('https://gmailauto.netlify.app/', 302);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
     return Response.json({ error: message }, { status: 500 });
