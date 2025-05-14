@@ -17,21 +17,22 @@ export async function GET(req: Request) {
   try {
     const auth = await getAccessToken(code);
     const gmail = google.gmail({ version: 'v1', auth });
-   const { access_token, refresh_token, expiry_date } = auth.credentials;
+  const { access_token, refresh_token, expiry_date } = auth.credentials;
 
 
     const profile = await gmail.users.getProfile({ userId: 'me' });
     const email = profile.data.emailAddress;
 
     // Save user credentials to Supabase
-   
+
 
     // Setup Gmail watch
     const watchResponse = await watchGmailInbox(auth);
     const historyId = watchResponse.historyId;
-     await db(email!, access_token!, refresh_token!, expiry_date!,historyId!);
+    await db(email!, access_token!, refresh_token!, expiry_date!,historyId!);
     console.log('Watch response:', watchResponse);
     // Redirect to main page
+    return new Response('Success! You can close this window.')
     return Response.redirect('https://gmailauto.netlify.app/', 302);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
