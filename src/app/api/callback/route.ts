@@ -2,6 +2,7 @@
 import { getAccessToken, watchGmailInbox } from '../gmail';
 import {db} from '../config/sperbaseClient'; // assumes your db() function is here
 import { google } from 'googleapis';
+import { watch } from 'fs';
 
 
 
@@ -32,7 +33,7 @@ export async function GET(req: Request) {
     await db(email!, access_token!, refresh_token!, expiry_date!,historyId!);
     console.log('Watch response:', watchResponse);
     // Redirect to main page
-    return new Response('Success! You can close this window.')
+    return Response.json(watchResponse, { status: 200 });
     return Response.redirect('https://gmailauto.netlify.app/', 302);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error';
